@@ -1,0 +1,69 @@
+---
+
+## **VM Specifications**
+
+The SOC Detection Lab was built as a multi-virtual-machine environment designed to simulate both defensive monitoring infrastructure and adversary activity within a controlled network. Each virtual machine was assigned resources based on its role in the environment, balancing performance requirements with the hardware limitations of the host system.
+
+The purpose of documenting these virtual machine specifications is to show how the lab was designed, what systems were required to support the monitoring pipeline, and how resources were allocated to ensure that core services could run reliably during testing and attack simulation.
+
+Because the lab was built on a personal virtualization platform, resource allocation had to be intentional. Systems responsible for log collection, indexing, and visualization required more processing power and memory than standard endpoints, while attacker systems and test endpoints could operate with lighter configurations.
+
+---
+
+## **ELK Server**
+
+The ELK Server serves as the central monitoring and analytics platform for the lab environment. It hosts the core Elastic components responsible for storing telemetry, processing logs, and displaying security data through Kibana.
+
+Because this system performs the heaviest workload in the lab, it was assigned higher resources than the other virtual machines. Elasticsearch requires sufficient memory for indexing and querying logs, while Kibana requires additional overhead for dashboards, alerting, and rule management.
+
+A typical allocation for this machine includes **4 virtual CPUs** and **8 GB of RAM**, running on **Ubuntu Server**. This configuration provides enough performance to support a small SOC lab while still remaining practical on a personal workstation.
+
+---
+
+## **Windows Server Endpoint**
+
+The Windows Server endpoint represents a monitored internal asset that can generate authentication logs, process activity, and security telemetry relevant to SOC investigations. It is also used as the target for RDP brute-force simulations in the lab.
+
+This machine does not need the same level of resources as the Elastic server, but it must have enough capacity to run the operating system, Elastic Agent, and remote access services without performance issues during testing.
+
+A typical allocation for this system includes **2 virtual CPUs** and **4 GB of RAM**, running **Windows Server**. This allows it to function as a stable monitored endpoint while producing meaningful telemetry for detection rules.
+
+---
+
+## **Linux Server Endpoint**
+
+The Linux Server endpoint represents an internal Linux-based asset within the monitored environment. It is used to generate SSH authentication events, system logs, and process activity, making it a key system for testing Linux-focused detections such as SSH brute-force attempts.
+
+This machine is lighter than the monitoring server but still important because it produces the Linux logs used for detection engineering and investigation workflows.
+
+A typical allocation for this system includes **2 virtual CPUs** and **2 to 4 GB of RAM**, running **Ubuntu Server**. This provides enough performance for SSH access, Elastic Agent operation, and normal endpoint activity without over-consuming host resources.
+
+---
+
+## **Kali Linux Attack System**
+
+The Kali Linux machine serves as the primary attacker system in the lab. It is used to launch simulated attacks such as RDP password guessing, SSH brute-force attempts, reconnaissance, and other controlled adversary activity against monitored endpoints.
+
+Because Kali is primarily used for attack execution and not for heavy log indexing or long-running services, it can function effectively with modest resource allocation.
+
+A typical allocation for this system includes **2 virtual CPUs** and **2 to 4 GB of RAM**, running **Kali Linux**. This is enough to support tools such as Ncrack and other offensive utilities used during threat simulation exercises.
+
+---
+
+## **Mythic Command-and-Control Server**
+
+The Mythic server is used to simulate command-and-control activity within the lab. It represents post-exploitation infrastructure and helps generate telemetry associated with agent callbacks, remote tasking, and suspicious network communication.
+
+Because Mythic runs multiple services and may support agent management and payload hosting, it generally requires more resources than a lightweight endpoint but less than a full Elastic stack node.
+
+A typical allocation for this system includes **2 to 4 virtual CPUs** and **4 GB of RAM**, depending on how extensively Mythic is used in the environment. This configuration is sufficient for demonstrating C2-related behavior in a portfolio-focused SOC lab.
+
+---
+
+## **Resource Allocation Strategy**
+
+The resource allocation strategy for the lab was designed around operational priority. Systems responsible for collecting, indexing, and visualizing data were given the most resources, while endpoints and attacker systems were provisioned more lightly.
+
+This approach makes it possible to run the environment efficiently on a personal machine while still maintaining realistic functionality. It also reflects an important lab design principle: not every system needs equal resources, but every system must have enough capacity to perform its specific role reliably.
+
+Documenting these specifications helps demonstrate that the environment was intentionally planned rather than assembled randomly, which strengthens the credibility of the project as a technical portfolio piece.
