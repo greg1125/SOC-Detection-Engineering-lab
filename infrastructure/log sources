@@ -1,0 +1,54 @@
+---
+
+## **Log Sources**
+
+The SOC Detection Lab collects telemetry from multiple log sources to simulate the types of security data analyzed by a real Security Operations Center.
+
+These logs provide visibility into authentication activity, system behavior, and network communication across the monitored endpoints.
+
+By combining logs from multiple operating systems and system components, the lab creates a realistic dataset that can be used for detection engineering and incident response investigations.
+
+---
+
+## **Windows Security Logs**
+
+Windows Security Event Logs are collected from the Windows Server endpoint to monitor authentication activity and system behavior.
+
+These logs include events related to:
+
+- Successful and failed login attempts
+- Account authentication events
+- Privilege usage
+- Account lockouts
+
+These logs are critical for detecting brute-force login attempts and unauthorized access activity.
+
+---
+
+## **Linux Authentication Logs**
+
+Linux authentication logs are collected from the Linux server endpoint, primarily from the system authentication log files.
+
+These logs capture events related to SSH access attempts, including both successful and failed logins.
+
+Because SSH brute-force attacks are a common attack technique, these logs provide valuable telemetry for building detection rules.
+
+---
+
+## **Process Activity**
+
+Process execution telemetry provides visibility into programs that run on monitored endpoints.
+
+These logs help analysts identify suspicious behavior such as unexpected command execution, malicious scripts, or unauthorized tools running on a system.
+
+Process activity data is often used in detection engineering to identify malicious behavior patterns rather than relying solely on authentication events.
+
+---
+
+## **Network Activity**
+
+Network telemetry provides insight into communication between systems within the lab environment.
+
+These logs capture information about outbound connections, inbound communication attempts, and interactions between attacker systems and monitored endpoints.
+
+Network activity logs are especially important when investigating command-and-control behavior or identifying suspicious lateral movement within a network.
