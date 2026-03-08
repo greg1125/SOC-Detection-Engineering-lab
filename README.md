@@ -1,7 +1,7 @@
 <u>SOC Detection Engineering Lab – Elastic SIEM + Adversary Simulation</u>
 <u>Project Overview</u>
 
-    This project demonstrates the design and implementation of a simulated Security Operations Center (SOC) environment capable of detecting, analyzing, and responding to malicious activity within a segmented lab network. The environment replicates the operational workflow used by modern security teams by collecting endpoint telemetry, analyzing events through a centralized Security Information and Event Management (SIEM) platform, and escalating incidents through an automated ticketing system.
+This project demonstrates the design and implementation of a simulated Security Operations Center (SOC) environment capable of detecting, analyzing, and responding to malicious activity within a segmented lab network. The environment replicates the operational workflow used by modern security teams by collecting endpoint telemetry, analyzing events through a centralized Security Information and Event Management (SIEM) platform, and escalating incidents through an automated ticketing system.
 
     The lab environment simulates both attacker behavior and defensive monitoring, allowing detection rules to be tested against realistic attack scenarios. Malicious activity is generated using an adversary simulation host and command-and-control infrastructure, while endpoint telemetry is collected through centralized logging agents deployed across monitored systems.
 
