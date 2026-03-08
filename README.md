@@ -8,7 +8,7 @@ The environment simulates both attacker behavior and defensive monitoring, allow
 
 The result is a full attack → detection → alert → investigation → ticket workflow, which mirrors the operational processes used by many modern SOC teams.
 
-Objectives
+****Objectives****
 
 The primary objectives of this project were:
 
