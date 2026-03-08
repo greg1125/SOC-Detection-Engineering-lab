@@ -87,10 +87,10 @@ This layer introduces realistic adversary behaviors beyond simple authentication
     Elasticsearch**
     Stores and indexes all collected log data.
     
-    **Kibana**
-    Provides the visualization interface used to search logs, create dashboards, and build detection rules.
+   **Kibana**
+   Provides the visualization interface used to search logs, create dashboards, and build detection rules.
     
-    Within this platform, collected telemetry is analyzed to identify suspicious behavior using custom detection rules.
+   Within this platform, collected telemetry is analyzed to identify suspicious behavior using custom detection rules.
 
 Detection Engineering
 
@@ -161,7 +161,7 @@ A new incident ticket is created for analyst investigation.
 
 This workflow simulates how modern SOC teams convert detection alerts into trackable security incidents.
 
-Security Monitoring Dashboards
+**Security Monitoring Dashboards**
 
 Custom dashboards were created in the SIEM interface to visualize security activity within the environment.
 
@@ -175,7 +175,7 @@ These dashboards provide visibility into:
 
 Dashboards allow analysts to quickly identify unusual activity patterns and monitor the health of the environment.
 
-Incident Investigation Workflow
+**Incident Investigation Workflow**
 
 When alerts are generated, analysts can investigate them through the SIEM interface by examining the associated log events.
 
@@ -193,26 +193,26 @@ Escalating the incident through the ticketing system
 
 This process simulates the typical triage workflow followed by SOC analysts.
 
-Skills Demonstrated
+**Skills Demonstrated**
 
 This project demonstrates hands-on experience with several core cybersecurity disciplines:
 
-Security Monitoring
+Security Monitoring:
 Deploying a SIEM platform and collecting endpoint telemetry.
 
-Detection Engineering
+Detection Engineering:
 Creating detection rules capable of identifying adversary behavior.
 
-Threat Simulation
+Threat Simulation:
 Generating attack activity to test monitoring capabilities.
 
-Incident Response Workflow
+Incident Response Workflow:
 Escalating alerts into trackable security incidents.
 
-Security Infrastructure Design
+Security Infrastructure Design:
 Designing and deploying a segmented SOC lab architecture.
 
-Technologies Used
+**Technologies Used**
 
 Elastic Stack (Elasticsearch, Kibana)
 Elastic Agent
@@ -224,7 +224,7 @@ Ubuntu Server
 osTicket
 VMware Workstation
 
-Future Improvements
+**Future Improvements**
 
 Several additional enhancements could expand the capabilities of this environment:
 
@@ -235,9 +235,9 @@ Several additional enhancements could expand the capabilities of this environmen
 • honeypot deployment for threat intelligence collection
 
 These improvements would further replicate enterprise SOC capabilities and expand the detection coverage of the lab.
-
+**
 Conclusion
-
+**
 This project demonstrates the complete lifecycle of security monitoring within a SOC environment. By combining adversary simulation with centralized log analysis and automated incident tracking, the lab replicates many of the workflows used by real-world security teams.
 
 Through this implementation, the project showcases practical experience in building and operating a security monitoring environment capable of detecting, analyzing, and responding to suspicious activity.
