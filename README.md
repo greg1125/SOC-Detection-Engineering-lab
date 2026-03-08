@@ -1,243 +1,209 @@
-# SOC-Detection-Engineering-lab
-
-**Project Overview**
-
-This project demonstrates the design and implementation of a simulated Security Operations Center (SOC) environment capable of detecting, analyzing, and responding to malicious activity within a controlled lab network. The goal of the lab is to replicate a simplified real-world security monitoring pipeline where endpoint activity is collected, analyzed by a SIEM platform, and escalated through an incident response workflow.
-
-The environment simulates both attacker behavior and defensive monitoring, allowing detection rules to be developed and validated against realistic attack scenarios. Adversary activity is generated using a dedicated attack host and command-and-control infrastructure, while endpoint telemetry is collected by a centralized logging system. Detection rules in the SIEM identify suspicious behavior and automatically generate alerts that feed into an incident tracking system.
-
-The result is a full attack → detection → alert → investigation → ticket workflow, which mirrors the operational processes used by many modern SOC teams.
-
-****Objectives****
-
-The primary objectives of this project were:
-
-• Design and deploy a segmented SOC lab network
-• Implement centralized log collection using a SIEM platform
-• Simulate adversary techniques within the lab environment
-• Develop detection rules capable of identifying malicious behavior
-• Generate alerts and integrate them with an incident ticketing system
-• Document investigation workflows and incident response procedures
+<u>SOC Detection Engineering Lab – Elastic SIEM + Adversary Simulation</u>
+<u>Project Overview</u>
 
-By achieving these objectives, the project demonstrates the core technical skills required in SOC analysis, detection engineering, and security monitoring.
+    This project demonstrates the design and implementation of a simulated Security Operations Center (SOC) environment capable of detecting, analyzing, and responding to malicious activity within a segmented lab network. The environment replicates the operational workflow used by modern security teams by collecting endpoint telemetry, analyzing events through a centralized Security Information and Event Management (SIEM) platform, and escalating incidents through an automated ticketing system.
 
-**High-Level Architecture**
+    The lab environment simulates both attacker behavior and defensive monitoring, allowing detection rules to be tested against realistic attack scenarios. Malicious activity is generated using an adversary simulation host and command-and-control infrastructure, while endpoint telemetry is collected through centralized logging agents deployed across monitored systems.
 
-The lab environment is built using virtual machines within a local hypervisor. Each component represents a typical system found in enterprise security environments.
+    The end result is a complete attack → detection → alert → investigation → ticket workflow, mirroring the security monitoring pipeline used in real-world SOC environments.
 
-The infrastructure consists of several key components:
+<u>Project Objectives</u>
 
-  **Attacker Simulation Layer**
-  
-  A dedicated attack workstation is used to simulate adversary behavior. This system performs controlled attack scenarios against the lab endpoints to generate security telemetry.
-  
-  These activities include:
-  
-  • Brute force authentication attempts
-  • Command and control communication
-  • Endpoint compromise simulations
+    The primary goal of this project was to design and deploy a working SOC monitoring environment capable of detecting malicious behavior within a controlled network.
 
-The purpose of this layer is to generate realistic security events that the monitoring stack must detect.
+    Key objectives included:
 
-  **Command and Control Infrastructure**
-  
-  A command and control (C2) server is deployed within the lab environment to simulate post-compromise attacker behavior. Compromised endpoints establish beacon communication with this server, mimicking the behavior of malware communicating with an attacker-controlled system.
-  
-  This enables the detection of:
-  
-  • suspicious outbound network connections
-  • beaconing behavior
-  • unauthorized process execution
-  • abnormal endpoint activity
+    • Designing a segmented virtual SOC lab network
+    • Deploying centralized log collection using Elastic SIEM
+    • Simulating attacker behavior within the environment
+    • Creating detection rules to identify malicious activity
+    • Generating alerts based on detection logic
+    • Automating incident ticket creation through osTicket
 
-This layer introduces realistic adversary behaviors beyond simple authentication attacks.
+    By completing these objectives, the project demonstrates practical experience in security monitoring, detection engineering, and SOC incident response workflows.
 
-  **Endpoint Layer**
-  
-  The lab includes both Windows and Linux servers that represent monitored endpoints within an enterprise network.
-  
-  These systems generate telemetry such as:
-  
-  • authentication attempts
-  • process execution events
-  • network connections
-  • system log activity
+<u>Lab Architecture</u>
 
-  Endpoint monitoring agents are installed on these systems to collect and forward log data to the centralized monitoring platform.
+    The environment is built using multiple virtual machines deployed within a local hypervisor. Each system represents a component typically found in enterprise security monitoring environments.
 
-  **Telemetry Collection Layer**
-  
-  Endpoint telemetry is collected using Elastic Agent, which operates as a unified data collection agent. The agent gathers system activity from each monitored host and forwards it to the central logging infrastructure.
-  
-  The agents are centrally managed through Fleet Server, which provides:
-  
-  • centralized policy management
-  • agent enrollment
-  • configuration distribution
-  • health monitoring
+    The architecture is composed of several functional layers responsible for generating telemetry, collecting logs, analyzing events, and escalating incidents.
 
-  This architecture allows security telemetry from multiple endpoints to be aggregated into a single analysis platform.
+Attack Simulation Layer
 
-  **SIEM and Analysis Layer**
-  
-  The core of the monitoring environment is the Elastic Stack, which functions as the Security Information and Event Management (SIEM) platform.
-  
-  The stack consists of:
-  **
-    Elasticsearch**
-    Stores and indexes all collected log data.
-    
-   **Kibana**
-   Provides the visualization interface used to search logs, create dashboards, and build detection rules.
-    
-   Within this platform, collected telemetry is analyzed to identify suspicious behavior using custom detection rules.
+    A dedicated adversary simulation host is used to generate malicious activity within the environment. This system performs controlled attack scenarios against monitored endpoints in order to produce realistic security telemetry.
 
-Detection Engineering
+    Examples of simulated attack activity include:
 
-Detection rules were developed to identify several simulated attack techniques. These rules analyze log events and trigger alerts when suspicious patterns are observed.
+    • brute force authentication attempts
+    • remote command execution
+    • command and control beaconing
 
-Examples of detection logic implemented in this lab include:
-**
-SSH Brute Force Detection**
+    These activities allow the monitoring infrastructure to detect and respond to behavior that resembles real adversary techniques.
 
-Multiple failed authentication attempts against a Linux server are monitored. When the number of failed login attempts exceeds a threshold within a short time window, the SIEM generates a detection alert.
+Command and Control Infrastructure
 
-This detection relies on Linux authentication logs and analyzes fields such as:
+    A command and control (C2) server is deployed within the lab environment to simulate the behavior of compromised endpoints communicating with attacker infrastructure.
 
-• username
-• source IP address
-• authentication result
+    After a system is compromised, it establishes outbound communication with the C2 server, replicating the behavior of malware that periodically contacts attacker-controlled systems.
 
-**RDP Brute Force Detection
-**
-Windows authentication events are monitored to identify repeated failed login attempts against administrative accounts.
+    This enables the monitoring system to detect behaviors such as:
 
-This detection analyzes Windows Security Event logs and identifies patterns such as:
+    • suspicious outbound network connections
+    • beaconing activity
+    • unauthorized command execution
 
-• repeated Event ID 4625 failures
-• login attempts targeting privileged accounts
-• authentication attempts originating from a single source IP
+Endpoint Layer
 
-**Command and Control Detection**
+    The monitored environment includes both Windows and Linux systems that represent enterprise endpoints within the network.
 
-The lab also simulates endpoint compromise through C2 beacon activity. Detection rules monitor network and process events that may indicate communication with a command and control server.
+    These systems generate telemetry including:
 
-This includes identifying:
+    • authentication events
+    • process creation activity
+    • network connections
+    • system logs
 
-• abnormal outbound network connections
-• suspicious process behavior
-• endpoint activity associated with remote command execution
+    Each endpoint runs a telemetry collection agent that forwards system activity to the centralized monitoring platform.
 
-**Alerting and Incident Workflow**
+Telemetry Collection Layer
 
-When a detection rule identifies suspicious behavior, the SIEM generates an alert containing detailed information about the event.
+    Endpoint telemetry is collected using Elastic Agent, which acts as a unified data collection agent capable of gathering logs from multiple sources.
 
-Each alert includes:
+    Agents are centrally managed through Fleet Server, which provides centralized management for agent enrollment, configuration, and policy enforcement.
 
-• the affected host
-• source IP address
-• user account involved
-• detection rule name
-• event timestamp
-• associated log data
+    Fleet enables administrators to:
 
-These alerts represent potential security incidents that require analyst investigation.
+    • enroll and manage monitoring agents
+    • deploy configuration policies
+    • monitor agent health
+    • update data collection rules
 
-**Automated Ticketing Integration**
+    This architecture allows telemetry from multiple systems to be aggregated into a single analysis platform.
 
-To simulate a real SOC incident response process, alerts generated by the SIEM are automatically forwarded to an incident tracking system.
+SIEM and Log Analysis Layer
 
-This project integrates the monitoring platform with osTicket, an open-source ticketing system commonly used for IT service management.
+    The core monitoring platform used in this project is the Elastic Stack, which functions as the Security Information and Event Management (SIEM) system.
 
-When a detection rule triggers:
+    The stack consists of two primary components:
 
-The SIEM generates an alert.
+    Elasticsearch
 
-The alert triggers an automated action.
+    Elasticsearch stores and indexes all collected security telemetry, allowing large volumes of event data to be searched and analyzed efficiently.
 
-The alert information is sent to the ticketing system via webhook.
+    Kibana
 
-A new incident ticket is created for analyst investigation.
+    Kibana provides the visualization and analysis interface used to search logs, build dashboards, create detection rules, and investigate alerts.
 
-This workflow simulates how modern SOC teams convert detection alerts into trackable security incidents.
+    Together, these tools allow analysts to monitor system activity and identify suspicious behavior across the environment.
 
-**Security Monitoring Dashboards**
+<u>Detection Engineering</u>
 
-Custom dashboards were created in the SIEM interface to visualize security activity within the environment.
+    Custom detection rules were created within the SIEM platform to identify specific adversary behaviors generated during attack simulations.
 
-These dashboards provide visibility into:
+    These rules analyze event logs and trigger alerts when suspicious patterns are detected.
 
-• authentication failures
-• endpoint alerts
-• network activity
-• detection rule triggers
-• host security events
+SSH Brute Force Detection
 
-Dashboards allow analysts to quickly identify unusual activity patterns and monitor the health of the environment.
+    This detection rule identifies repeated failed authentication attempts against a Linux server.
 
-**Incident Investigation Workflow**
+    If multiple login failures occur within a short time window from the same source IP address, the SIEM generates a detection alert indicating a potential brute force attack.
 
-When alerts are generated, analysts can investigate them through the SIEM interface by examining the associated log events.
+    Relevant log fields include:
 
-Typical investigation steps include:
+    • username
+    • source IP address
+    • authentication result
 
-Reviewing the detection alert details
+RDP Brute Force Detection
 
-Identifying the affected host and user account
+    Windows authentication logs are monitored to detect repeated failed login attempts targeting privileged accounts.
 
-Examining related authentication or network logs
+    The detection logic analyzes Windows Security Event logs to identify patterns such as:
 
-Determining whether activity represents malicious behavior
+    • repeated Event ID 4625 login failures
+    • login attempts targeting administrative accounts
+    • authentication attempts originating from a single source IP
 
-Escalating the incident through the ticketing system
+Command and Control Detection
 
-This process simulates the typical triage workflow followed by SOC analysts.
+    The lab environment also simulates compromised endpoint behavior through command and control communication.
 
-**Skills Demonstrated**
+    Detection rules monitor endpoint telemetry for suspicious outbound network activity and abnormal process behavior that may indicate remote command execution.
 
-This project demonstrates hands-on experience with several core cybersecurity disciplines:
+<u>Alerting and Incident Workflow</u>
 
-Security Monitoring:
-Deploying a SIEM platform and collecting endpoint telemetry.
+    When a detection rule identifies suspicious behavior, the SIEM generates an alert containing detailed information about the event.
 
-Detection Engineering:
-Creating detection rules capable of identifying adversary behavior.
+    Each alert includes:
 
-Threat Simulation:
-Generating attack activity to test monitoring capabilities.
+    • affected host
+    • source IP address
+    • user account involved
+    • detection rule name
+    • event timestamp
 
-Incident Response Workflow:
-Escalating alerts into trackable security incidents.
+    These alerts represent potential security incidents that require investigation.
 
-Security Infrastructure Design:
-Designing and deploying a segmented SOC lab architecture.
+<u>Automated Incident Ticketing</u>
 
-**Technologies Used**
+    To simulate a real SOC incident response workflow, alerts generated by the SIEM are automatically forwarded to osTicket, an open-source ticketing system.
 
-Elastic Stack (Elasticsearch, Kibana)
-Elastic Agent
-Fleet Server
-Mythic Command and Control Framework
-Kali Linux
-Windows Server
-Ubuntu Server
-osTicket
-VMware Workstation
+    When a detection rule triggers:
 
-**Future Improvements**
+    1. The SIEM generates an alert.
+    2. The alert triggers a webhook action.
+    3. Alert data is forwarded to osTicket.
+    4. A new incident ticket is created.
 
-Several additional enhancements could expand the capabilities of this environment:
+    This automation demonstrates how security alerts are converted into trackable incidents within SOC operations.
 
-• Active Directory attack simulation
-• lateral movement detection
-• integration of endpoint detection and response tools
-• automated response actions (SOAR workflows)
-• honeypot deployment for threat intelligence collection
+<u>Security Monitoring Dashboards</u>
 
-These improvements would further replicate enterprise SOC capabilities and expand the detection coverage of the lab.
-**
-Conclusion
-**
-This project demonstrates the complete lifecycle of security monitoring within a SOC environment. By combining adversary simulation with centralized log analysis and automated incident tracking, the lab replicates many of the workflows used by real-world security teams.
+    Custom dashboards were created within the SIEM interface to visualize security activity across the environment.
 
-Through this implementation, the project showcases practical experience in building and operating a security monitoring environment capable of detecting, analyzing, and responding to suspicious activity.
+    These dashboards provide visibility into:
+
+    • authentication failures
+    • detection rule triggers
+    • endpoint alerts
+    • network activity
+
+    Dashboards enable analysts to quickly identify suspicious patterns and monitor the health of the environment.
+
+<u>Skills Demonstrated</u>
+
+    This project demonstrates hands-on experience in several key cybersecurity disciplines:
+
+    • Security Information and Event Management (SIEM) deployment
+    • Detection rule engineering
+    • Endpoint telemetry collection
+    • Threat simulation and adversary emulation
+    • Incident response workflows
+    • Security automation
+
+<u>Technologies Used</u>
+
+    Elastic Stack (Elasticsearch, Kibana)
+    Elastic Agent
+    Fleet Server
+    Mythic Command and Control Framework
+    Kali Linux
+    Windows Server
+    Ubuntu Server
+    osTicket
+    VMware Workstation
+
+<u>Future Improvements</u>
+
+    Several enhancements could further expand the capabilities of this environment:
+
+    • Active Directory attack simulation
+    • lateral movement detection
+    • honeypot deployment for threat intelligence collection
+    • automated response actions (SOAR integration)
+
+<u>Conclusion</u>
+
+    This project demonstrates the full lifecycle of security monitoring within a SOC environment. By combining adversary simulation, centralized log analysis, detection engineering, and automated incident tracking, the lab replicates many of the workflows used by modern security operations teams.
+
+    Through this implementation, the project showcases practical experience in building and operating a security monitoring environment capable of detecting, analyzing, and responding to malicious activity.
