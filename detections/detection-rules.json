@@ -1,3 +1,7 @@
+All detection rules included in this repository have been sanitized to remove
+sensitive information such as internal IP addresses, usernames, API keys,
+hostnames, and internal URLs before publication.
+
 [
 {
   "name": "SSH-Brute-Force-Attempt",
@@ -128,6 +132,4 @@
 }
 ]
 
-All detection rules included in this repository have been sanitized to remove
-sensitive information such as internal IP addresses, usernames, API keys,
-hostnames, and internal URLs before publication.
+
