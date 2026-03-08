@@ -16,7 +16,7 @@ The ELK Server functions as the central Security Information and Event Managemen
 
 It is responsible for ingesting, storing, indexing, and analyzing telemetry collected from monitored systems. The ELK stack consists primarily of Elasticsearch and Kibana, which together provide the core functionality for security monitoring and investigation.
 
-Elasticsearch acts as the backend data store that receives logs from endpoint agents and indexes them for fast searching and correlation. Because Elasticsearch is optimized for large-scale log ingestion and querying, it enables analysts to quickly analyze activity across multiple systems.
+Elasticsearch acts as the backend data store that receives logs from endpoint agents and indexes them for fast searching and correlation. Because Elasticsearch is optimized for large-scale log ingestion and querying, it allows analysts to quickly analyze activity across multiple systems.
 
 Kibana provides the visualization and analysis interface used by analysts to interact with the SIEM platform. Through Kibana, analysts can:
 
@@ -52,3 +52,131 @@ For example, an endpoint policy may instruct the agent to collect:
 - Network connection events
 
 Fleet therefore acts as the control plane for telemetry collection across the SOC monitoring environment.
+
+---
+
+### **Windows Endpoint**
+
+The Windows Endpoint represents a monitored host within the simulated enterprise network.
+
+This system generates a wide range of security telemetry that can be analyzed by the SIEM platform. Services such as Remote Desktop Protocol (RDP) are enabled to allow authentication activity and attack simulations to occur.
+
+The Windows system generates logs such as:
+
+- Authentication events
+- Failed login attempts
+- Process creation events
+- System security logs
+
+Elastic Agent installed on the endpoint collects this telemetry directly from the Windows Event Log system.
+
+These logs are forwarded to Elasticsearch, where detection rules analyze authentication behavior and identify suspicious activity such as repeated login failures.
+
+Within the lab environment, the Windows endpoint serves as one of the primary targets for adversary simulation activity.
+
+---
+
+### **Linux Endpoint**
+
+The Linux Endpoint represents another monitored system within the environment and provides additional telemetry sources for security monitoring.
+
+This system runs services such as Secure Shell (SSH) to allow remote login attempts to be simulated by the attacker machine.
+
+The Linux host generates telemetry including:
+
+- SSH authentication logs
+- User login activity
+- Process execution events
+- System service logs
+
+Elastic Agent collects logs from Linux system log files such as:
+
+- /var/log/auth.log
+- /var/log/syslog
+
+These logs are forwarded to Elasticsearch, where detection rules analyze authentication activity and detect patterns such as repeated SSH login failures that may indicate brute force attacks.
+
+Including both Windows and Linux endpoints demonstrates the ability to monitor multiple operating systems and log sources, which is common in real enterprise environments.
+
+---
+
+### **Mythic C2 Server**
+
+The Mythic C2 Server is used to simulate attacker command-and-control infrastructure.
+
+In real-world cyber attacks, once an attacker compromises a system, the infected machine often communicates with a command-and-control server controlled by the attacker. This allows the attacker to issue commands, retrieve data, and maintain persistent access to the compromised system.
+
+Mythic is an open-source command-and-control framework commonly used for adversary emulation and red-team operations.
+
+Within this lab environment, the Mythic server simulates post-compromise attacker behavior by allowing compromised endpoints to communicate with a C2 infrastructure.
+
+This communication generates telemetry such as:
+
+- Outbound network connections
+- Suspicious process activity
+- Command execution events
+
+Detection rules in the SIEM platform can analyze these behaviors and generate alerts when potential command-and-control activity is detected.
+
+---
+
+### **Kali Attacker Machine**
+
+The Kali Attacker Machine acts as the adversary simulation host used to generate malicious activity within the lab environment.
+
+Kali Linux is a penetration testing distribution that contains a wide range of offensive security tools used for vulnerability testing, attack simulation, and adversary emulation.
+
+Within this project, the Kali machine is used to perform controlled attack scenarios such as:
+
+- Brute force authentication attacks
+- Credential guessing attempts
+- Remote command execution
+- Interaction with the command-and-control server
+
+These activities generate realistic security events that are captured by endpoint logging agents and forwarded to the SIEM platform.
+
+The Kali machine therefore acts as the source of adversary activity within the environment.
+
+---
+
+### **osTicket Server**
+
+The osTicket Server functions as the incident tracking and ticket management system for the simulated SOC environment.
+
+When detection rules in the SIEM identify suspicious behavior, alerts are generated within Kibana. These alerts are then forwarded to the osTicket server using a webhook integration.
+
+This integration simulates how real SOC environments convert security alerts into trackable incident tickets.
+
+The workflow typically follows these steps:
+
+1. A detection rule identifies suspicious activity
+2. Kibana generates a security alert
+3. A webhook sends the alert information to osTicket
+4. osTicket creates a new incident ticket
+
+The ticket contains relevant information such as:
+
+- Detection rule name
+- Affected host
+- Source IP address
+- Timestamp of the event
+
+Security analysts can then investigate the alert using the SIEM platform and document their findings within the ticket.
+
+---
+
+### **How the Systems Work Together**
+
+The environment operates as a coordinated security monitoring pipeline.
+
+The Kali attacker machine generates adversary activity targeting the Windows and Linux endpoints. These systems produce telemetry such as authentication attempts, process executions, and network connections.
+
+Elastic Agents installed on the endpoints collect this telemetry and forward it to the ELK Server. The Fleet Server centrally manages these agents and ensures the correct telemetry sources are collected.
+
+Elasticsearch stores the collected data while Kibana analyzes the logs using detection rules. When suspicious behavior is detected, Kibana generates security alerts.
+
+These alerts are forwarded to the osTicket server, where they become incident tickets that analysts can investigate and track.
+
+The Mythic C2 server adds additional realism by simulating command-and-control communication from compromised systems.
+
+Together, these systems replicate the full lifecycle of SOC operations—from attack simulation to detection, alerting, and incident response.
