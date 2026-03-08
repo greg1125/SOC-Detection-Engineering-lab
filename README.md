@@ -27,70 +27,70 @@ The lab environment is built using virtual machines within a local hypervisor. E
 
 The infrastructure consists of several key components:
 
-Attacker Simulation Layer
-
-A dedicated attack workstation is used to simulate adversary behavior. This system performs controlled attack scenarios against the lab endpoints to generate security telemetry.
-
-These activities include:
-
-• Brute force authentication attempts
-• Command and control communication
-• Endpoint compromise simulations
+  **Attacker Simulation Layer**
+  
+  A dedicated attack workstation is used to simulate adversary behavior. This system performs controlled attack scenarios against the lab endpoints to generate security telemetry.
+  
+  These activities include:
+  
+  • Brute force authentication attempts
+  • Command and control communication
+  • Endpoint compromise simulations
 
 The purpose of this layer is to generate realistic security events that the monitoring stack must detect.
 
-**Command and Control Infrastructure**
-
-A command and control (C2) server is deployed within the lab environment to simulate post-compromise attacker behavior. Compromised endpoints establish beacon communication with this server, mimicking the behavior of malware communicating with an attacker-controlled system.
-
-This enables the detection of:
-
-• suspicious outbound network connections
-• beaconing behavior
-• unauthorized process execution
-• abnormal endpoint activity
+  **Command and Control Infrastructure**
+  
+  A command and control (C2) server is deployed within the lab environment to simulate post-compromise attacker behavior. Compromised endpoints establish beacon communication with this server, mimicking the behavior of malware communicating with an attacker-controlled system.
+  
+  This enables the detection of:
+  
+  • suspicious outbound network connections
+  • beaconing behavior
+  • unauthorized process execution
+  • abnormal endpoint activity
 
 This layer introduces realistic adversary behaviors beyond simple authentication attacks.
 
-**Endpoint Layer**
+  **Endpoint Layer**
+  
+  The lab includes both Windows and Linux servers that represent monitored endpoints within an enterprise network.
+  
+  These systems generate telemetry such as:
+  
+  • authentication attempts
+  • process execution events
+  • network connections
+  • system log activity
 
-The lab includes both Windows and Linux servers that represent monitored endpoints within an enterprise network.
+  Endpoint monitoring agents are installed on these systems to collect and forward log data to the centralized monitoring platform.
 
-These systems generate telemetry such as:
+  **Telemetry Collection Layer**
+  
+  Endpoint telemetry is collected using Elastic Agent, which operates as a unified data collection agent. The agent gathers system activity from each monitored host and forwards it to the central logging infrastructure.
+  
+  The agents are centrally managed through Fleet Server, which provides:
+  
+  • centralized policy management
+  • agent enrollment
+  • configuration distribution
+  • health monitoring
 
-• authentication attempts
-• process execution events
-• network connections
-• system log activity
+  This architecture allows security telemetry from multiple endpoints to be aggregated into a single analysis platform.
 
-Endpoint monitoring agents are installed on these systems to collect and forward log data to the centralized monitoring platform.
-
-**Telemetry Collection Layer**
-
-Endpoint telemetry is collected using Elastic Agent, which operates as a unified data collection agent. The agent gathers system activity from each monitored host and forwards it to the central logging infrastructure.
-
-The agents are centrally managed through Fleet Server, which provides:
-
-• centralized policy management
-• agent enrollment
-• configuration distribution
-• health monitoring
-
-This architecture allows security telemetry from multiple endpoints to be aggregated into a single analysis platform.
-
-**SIEM and Analysis Layer**
-
-The core of the monitoring environment is the Elastic Stack, which functions as the Security Information and Event Management (SIEM) platform.
-
-The stack consists of:
-
-Elasticsearch
-Stores and indexes all collected log data.
-
-Kibana
-Provides the visualization interface used to search logs, create dashboards, and build detection rules.
-
-Within this platform, collected telemetry is analyzed to identify suspicious behavior using custom detection rules.
+  **SIEM and Analysis Layer**
+  
+  The core of the monitoring environment is the Elastic Stack, which functions as the Security Information and Event Management (SIEM) platform.
+  
+  The stack consists of:
+  **
+    Elasticsearch**
+    Stores and indexes all collected log data.
+    
+    **Kibana**
+    Provides the visualization interface used to search logs, create dashboards, and build detection rules.
+    
+    Within this platform, collected telemetry is analyzed to identify suspicious behavior using custom detection rules.
 
 Detection Engineering
 
