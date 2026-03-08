@@ -27,7 +27,7 @@ The lab environment is built using virtual machines within a local hypervisor. E
 
 The infrastructure consists of several key components:
 
-**Attacker Simulation Layer**
+Attacker Simulation Layer
 
 A dedicated attack workstation is used to simulate adversary behavior. This system performs controlled attack scenarios against the lab endpoints to generate security telemetry.
 
