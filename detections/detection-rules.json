@@ -1,0 +1,133 @@
+[
+{
+  "name": "SSH-Brute-Force-Attempt",
+  "type": "threshold",
+  "language": "kuery",
+  "description": "Detects repeated failed SSH authentication attempts against a monitored Linux endpoint.",
+  "severity": "medium",
+  "risk_score": 47,
+  "interval": "1m",
+  "from": "now-6m",
+  "index": [
+    "logs-*",
+    "filebeat-*",
+    "auditbeat-*",
+    "logs-system.auth-*"
+  ],
+  "query": "system.auth.ssh.event: Failed",
+  "threshold": {
+    "field": [
+      "user.name",
+      "source.ip",
+      "host.name"
+    ],
+    "value": 5
+  },
+  "required_fields": [
+    "source.ip",
+    "user.name",
+    "host.name"
+  ],
+  "actions": [
+    {
+      "type": "webhook",
+      "name": "ticketing-integration",
+      "description": "Creates an incident ticket when brute force activity is detected"
+    }
+  ]
+},
+
+{
+  "name": "RDP-Brute-Force-Attempt",
+  "type": "threshold",
+  "language": "kuery",
+  "description": "Detects repeated failed RDP login attempts against a Windows endpoint.",
+  "severity": "medium",
+  "risk_score": 47,
+  "interval": "1m",
+  "from": "now-6m",
+  "index": [
+    "winlogbeat-*",
+    "logs-*"
+  ],
+  "query": "event.code:4625",
+  "threshold": {
+    "field": [
+      "source.ip",
+      "user.name",
+      "host.name"
+    ],
+    "value": 5
+  },
+  "required_fields": [
+    "source.ip",
+    "user.name",
+    "host.name"
+  ],
+  "actions": [
+    {
+      "type": "webhook",
+      "name": "ticketing-integration",
+      "description": "Creates an incident ticket when RDP brute force activity is detected"
+    }
+  ]
+},
+
+{
+  "name": "Mythic-C2-Apollo-Agent-Detected",
+  "type": "query",
+  "language": "kuery",
+  "description": "Detects indicators associated with Mythic Apollo command-and-control agent activity.",
+  "severity": "critical",
+  "risk_score": 99,
+  "interval": "1m",
+  "from": "now-6m",
+  "index": [
+    "winlogbeat-*",
+    "logs-*"
+  ],
+  "query": "event.code:1 AND (process.name:\"suspicious_binary.exe\" OR process.hash:\"<REDACTED_HASH>\")",
+  "required_fields": [
+    "@timestamp",
+    "process.name",
+    "process.parent.name",
+    "process.command_line"
+  ],
+  "actions": [
+    {
+      "type": "webhook",
+      "name": "ticketing-integration",
+      "description": "Creates an incident ticket when potential C2 activity is detected"
+    }
+  ]
+},
+
+{
+  "name": "Elastic Endpoint Security Alert",
+  "type": "query",
+  "language": "kuery",
+  "description": "Generates an alert when Elastic Defend detects suspicious endpoint activity.",
+  "severity": "medium",
+  "risk_score": 47,
+  "interval": "1m",
+  "from": "now-2m",
+  "index": [
+    "logs-endpoint.alerts-*"
+  ],
+  "query": "event.kind:alert AND event.module:endpoint",
+  "required_fields": [
+    "event.kind",
+    "event.module"
+  ],
+  "response_actions": [
+    {
+      "type": "endpoint_isolation",
+      "description": "Isolates compromised endpoint from the network"
+    }
+  ]
+}
+]
+
+All detection rules included in this repository have been sanitized to remove
+sensitive information such as internal IP addresses, usernames, API keys,
+hostnames, and internal URLs before publication.
