@@ -62,27 +62,6 @@ This ensures that only authorized systems can create tickets through the API.
 
 ---
 
-# Alert Data Mapping
-
-The webhook payload uses dynamic variables from the alert context.
-
-These variables allow detection rules to populate ticket information automatically.
-
-Examples:
-
-```
-{{rule.name}}
-{{context.alerts.0.source.ip}}
-{{context.alerts.0.user.name}}
-{{context.alerts.0.host.hostname}}
-{{context.alerts.0.kibana.alert.threshold_result.count}}
-```
-
-When the rule fires, these placeholders are replaced with actual alert values.
-
----
-
----
 
 # Webhook Payload Example
 
