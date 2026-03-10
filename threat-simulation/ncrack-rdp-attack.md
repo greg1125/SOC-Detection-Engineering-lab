@@ -12,7 +12,7 @@ The objective of this simulation is to generate authentication telemetry that ca
 ### Attack Results
 
 ![RDP Bruteforce Attack](../screenshots/threat-simulation/rdp-bruteforce.png)
----
+
 
 
 ## **Step 1 — Verify the Target Service**
