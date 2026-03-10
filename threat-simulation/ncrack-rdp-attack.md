@@ -1,6 +1,3 @@
-
-![test](../screenshots/threat-simulation/rdp-bruteforce.png)
-
 # **Ncrack RDP Brute Force Simulation**
 
 This simulation demonstrates how automated password guessing attacks can target Remote Desktop Protocol (RDP) services on Windows systems.
@@ -14,7 +11,7 @@ The objective of this simulation is to generate authentication telemetry that ca
 
 ---
 
-![RDP Brute Force Simulation](../screenshots/threat-simulation/rdp-bruteforce.png)
+![RDP Brute Force Simulation](../../screenshots/threat-simulation/rdp-bruteforce.png)
 
 ---
 
