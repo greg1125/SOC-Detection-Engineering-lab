@@ -6,6 +6,8 @@ This section documents the **full process used to generate command-and-control (
 
 The process includes **C2 server deployment, payload creation, payload delivery, execution, callback registration, and telemetry generation**, all of which contribute to triggering detection rules within the SIEM.
 
+![mythic](mythic-c2.png)
+
 ---
 
 ## **Step 1 — Clone the Mythic Repository**
