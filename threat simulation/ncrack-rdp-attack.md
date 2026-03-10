@@ -10,7 +10,7 @@ Within the SOC Detection Lab, a Kali Linux attacker machine repeatedly attempts 
 
 The objective of this simulation is to generate authentication telemetry that can be detected by threshold-based brute-force detection rules within Elastic Security.
 
-![RDP Brute Force Simulation](../screenshots/threat-simulation/rdp-bruteforce.png)
+![RDP Brute Force Simulation](screenshots/threat simultation/rdp-bruteforce.png)
 ---
 
 ## **Step 1 — Verify the Target Service**
