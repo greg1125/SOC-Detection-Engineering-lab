@@ -4,7 +4,7 @@
 
 The SOC Detection Lab is composed of several virtual machines that simulate monitoring infrastructure, production endpoints, attacker systems, and incident response tooling. Each system was allocated resources based on its operational role while ensuring the environment could run reliably on a single host system.
 
-![osTicket Incident](../screenshots/ticketing/osticket-ticket.png)
+![SOC Lab Virtual Machines](../screenshots/infrastructure/vm-lab-environment.png)
 ---
 
 ## **Elastic Stack Server**
