@@ -10,7 +10,7 @@ The objective of this simulation is to generate authentication telemetry that ca
 
 
 
-![RDP](https://raw.githubusercontent.com/<greg1125>/SOC-Detection-Engineering-lab/main/screenshots/threat-simulation/rdp-bruteforce.png)
+![RDP Bruteforce](../screenshots/threat-simulation/rdp-bruteforce.png)
 ---
 
 
