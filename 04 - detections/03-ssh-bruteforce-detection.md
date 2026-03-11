@@ -6,6 +6,9 @@ This detection rule identifies repeated failed SSH authentication attempts again
 
 In the lab environment, this behavior is simulated using a Kali Linux attacker system running password guessing tools against the monitored Linux endpoint.
 
+![SSH Bruteforce](ssh-rule.png)
+
+The rule, listed above.
 ---
 
 ## **Detection Logic**
