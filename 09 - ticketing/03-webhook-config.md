@@ -23,6 +23,7 @@ These requests can contain structured alert information such as:
 
 The receiving system can then process the request and take automated action.
 
+![Webhook Connector](webhookconnector.png)
 ---
 
 # Connector Configuration
