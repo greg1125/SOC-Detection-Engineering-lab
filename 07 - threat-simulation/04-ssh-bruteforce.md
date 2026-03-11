@@ -8,6 +8,8 @@ The attack is performed using **Ncrack** from the Kali Linux attacker machine. M
 
 These logs allow the Elastic Security platform to detect brute-force login attempts targeting SSH services.
 
+![SSH Brute Force](ssh-bruteforce.png)
+
 ---
 
 ## **Step 1 — Verify SSH Service Availability**
