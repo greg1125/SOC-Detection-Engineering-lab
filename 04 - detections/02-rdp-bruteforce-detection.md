@@ -6,6 +6,10 @@ This detection rule identifies repeated failed Remote Desktop Protocol (RDP) log
 
 In the lab environment, this attack is simulated using a Kali Linux system running password guessing tools against the Windows Server endpoint.
 
+![RDP Bruteforce](rdp-rule.png)
+
+The rule, listed above
+
 ---
 
 ## **Detection Logic**
