@@ -127,7 +127,7 @@ These visualizations provide deeper insight into system behavior beyond authenti
 
 # Endpoint Activity Dashboard
 
-![Endpoint Activity Dashboard](../screenshots/endpoint-activity-dashboard.png)
+
 
 ---
 
