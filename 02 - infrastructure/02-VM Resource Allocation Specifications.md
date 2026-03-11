@@ -24,6 +24,7 @@ Purpose: Runs Elasticsearch and Kibana to store and analyze security telemetry c
 
 ![VM Resources](vm-resources(fleet).png)
 
+as an example of the resources used to spin up the servers, fleet allocation is listed.
 
 Role: Central management server for Elastic Agents.
 
