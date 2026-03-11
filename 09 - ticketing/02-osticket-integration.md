@@ -6,6 +6,8 @@ The ticketing system used in this environment is **osTicket**, which allows secu
 
 This integration demonstrates how security alerts transition from monitoring systems into a structured incident response workflow.
 
+![osTicket Ticket](osticket-ticket.png)
+
 ---
 
 # Purpose of Ticketing in a SOC
