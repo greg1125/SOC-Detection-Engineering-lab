@@ -22,6 +22,9 @@ Purpose: Runs Elasticsearch and Kibana to store and analyze security telemetry c
 
 ## **Fleet Server**
 
+![VM Resources](vm-resources(fleet).png)
+
+
 Role: Central management server for Elastic Agents.
 
 OS: Ubuntu Server  
