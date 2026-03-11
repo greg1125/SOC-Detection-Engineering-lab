@@ -23,7 +23,7 @@ These visualizations provide analysts with immediate visibility into abnormal be
 
 # SOC Monitoring Dashboard
 
-[Endpoint Dashboard](endpoint-dashboard.png)
+![Endpoint Dashboard](endpoint-dashboard.png)
 
 ---
 
