@@ -23,11 +23,13 @@ These visualizations provide analysts with immediate visibility into abnormal be
 
 # SOC Monitoring Dashboard
 
-![SOC Monitoring Dashboard](../screenshots/soc-monitoring-dashboard.png)
+[Endpoint Dashboard](endpoint-dashboard.png)/soc-monitoring-dashboard.png)
 
 ---
 
 # Authentication Monitoring Panels
+
+![Authentication Dashboard](Authentication-dashboard.png)
 
 The first set of dashboard panels focuses on authentication activity across both Windows and Linux endpoints.
 
