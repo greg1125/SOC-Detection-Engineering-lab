@@ -8,7 +8,7 @@ Command-and-control frameworks allow attackers to remotely control compromised m
 
 In this lab environment, a Mythic server is deployed to simulate post-exploitation activity and generate realistic adversary telemetry.
 
-![Mythic C2](mythic-c2.png)
+![Mythic C2](Mythic-rule.png)
 
 The rule, listed above.
 
